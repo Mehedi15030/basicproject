@@ -1,4 +1,9 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using basicproject.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<basicprojectContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("basicprojectContext") ?? throw new InvalidOperationException("Connection string 'basicprojectContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
